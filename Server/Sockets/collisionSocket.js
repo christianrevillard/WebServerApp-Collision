@@ -31,10 +31,10 @@ var CollisionTest = function(collision, socket){
 	var game = this;
 	
 	// each user gets a new room
-	this.controller = new serverController.Controller(collision, socket.id, false)
+	this.controller = new serverController.Controller(collision, socket.id, true)
 	this.controller.addSocket(socket);	
 
-	this.controller.addElement({
+/*	this.controller.addElement({
 		name: 'left',
 		typeName: 'wall',
 		box: {width:20, height:500 },
@@ -64,9 +64,90 @@ var CollisionTest = function(collision, socket){
 		box: {width:700, height:20 },
 		position: {x: 350, y: 490},			
 		solid: {mass:Infinity}
-	});
-		
+	});*/
+
+	for (var i=25;i<675;i=i+51)
+	{
+		this.controller.addCircle({
+			name: 'round1',
+			clientType: 'bigRound',
+			radius: 25,
+			position: {x: i, y: 0},			
+			solid: {
+				mass:Infinity}
+		});
+		this.controller.addCircle({
+			name: 'round1',
+			clientType: 'bigRound',
+			radius: 25,
+			position: {x: i, y: 500},			
+			solid: {
+				mass:Infinity}
+		});
+	};
 	
+	for (var j=25;j<475;j=j+51)
+	{
+		this.controller.addCircle({
+			name: 'round1',
+			clientType: 'bigRound',
+			radius: 25,
+			position: {x: 0, y: j},			
+			solid: {
+				mass:Infinity}
+		});
+		this.controller.addCircle({
+			name: 'round1',
+			clientType: 'bigRound',
+			radius: 25,
+			position: {x: 700, y: j},			
+			solid: {
+				mass:Infinity}
+		});
+	};
+	
+	
+for (var i=100;i<500;i=i+100) //400
+for (var j=200;j<400;j=j+100)
+{
+	this.controller.addCircle({
+		name: 'round1',
+		clientType: 'round',
+		radius: 10,
+		position: {x: i, y: j-1.2*(i/5)},			
+		solid: {mass:1, collisionCoefficient:1},
+		moving: {speed:{x:i-300,y:j-200},acceleration:{y:500}}
+	});
+	this.controller.addCircle({
+		name: 'round1',
+		clientType: 'bigRound',
+		radius: 25,
+		position: {x: i, y: j-1.2*(i/5)+10+1+25},			
+		solid: {mass:2, collisionCoefficient:1},
+		moving: {speed:{x:i-300,y:j-200},acceleration:{y:500}}
+	});
+};
+/*
+for (var i=100;i<600;i=i+20)
+for (var j=310;j<311;j=j+20)
+	this.controller.addElement({
+		name: 'round1',
+		typeName: 'round',
+		position: {x: i, y: j-i/5},			
+		solid: {mass:Infinity}
+	});*/
+
+/*	this.controller.addElement({
+		name: 'round2',
+		typeName: 'round',
+		position: {x: 500, y: 250 },			
+		solid: {
+			mass:1,
+			isInside:function(x,y){ return x*x + y*y < 2500;}}, // to do: RoundElement
+		moving: {speed:{x:-100}}
+	});
+*/
+	/*
 	for (i=10;i<15;i++)
 	{
 		this.controller.addElement({
@@ -128,7 +209,7 @@ var CollisionTest = function(collision, socket){
 			solid: {mass:1},
 			moving: {speed:{x:-100}}
 		});
-	}
+	}*/
 	
 	this.disconnect = function()
 	{
