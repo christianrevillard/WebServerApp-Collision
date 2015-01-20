@@ -31,41 +31,65 @@ var CollisionTest = function(collision, socket){
 	var game = this;
 	
 	// each user gets a new room
-	this.controller = new serverController.Controller(collision, socket.id, true)
+	this.controller = new serverController.Controller(collision, socket.id, false)
 	this.controller.addSocket(socket);	
 
-/*	this.controller.addElement({
+	this.controller.addAxeAlignedBox({
 		name: 'left',
-		typeName: 'wall',
-		box: {width:20, height:500 },
-		position: {x: 10, y: 250},			
+		clientType: 'verticalWall',
+		left:0,
+		right:20,
+		top:0,
+		bottom:500,
+		position: {x: 0, y: 0},			
 		solid: {mass:Infinity}
 	});
 
-	this.controller.addElement({
+	this.controller.addAxeAlignedBox({
 		name: 'right',
-		typeName: 'wall',
-		box: {width:20, height:500 },
-		position: {x: 690, y: 250},			
+		clientType: 'verticalWall',
+		left:0,
+		right:20,
+		top:0,
+		bottom:500,
+		position: {x: 680, y: 0},			
 		solid: {mass:Infinity}
 	});
 
-	this.controller.addElement({
-		name: 'top',
-		typeName: 'top',
-		box: {width:700, height:20 },
-		position: {x: 350, y: 10},			
-		solid: {mass:Infinity}
-	});
-	
-	this.controller.addElement({
-		name: 'bottom',
-		typeName: 'top',
-		box: {width:700, height:20 },
-		position: {x: 350, y: 490},			
+	/*
+	this.controller.addAxeAlignedBox({
+		name: 'middle',
+		clientType: 'verticalWall',
+		left:0,
+		right:20,
+		top:0,
+		bottom:250,
+		position: {x: 340, y: 125},			
 		solid: {mass:Infinity}
 	});*/
 
+	this.controller.addAxeAlignedBox({
+		name: 'top',
+		clientType: 'horizontalWall',
+		left:0,
+		right:700,
+		top:0,
+		bottom:20,
+		position: {x: 0, y: 0},			
+		solid: {mass:Infinity}
+	});
+
+	this.controller.addAxeAlignedBox({
+		name: 'bottom',
+		clientType: 'horizontalWall',
+		left:0,
+		right:700,
+		top:0,
+		bottom:20,
+		position: {x: 0, y: 480},			
+		solid: {mass:Infinity}
+	});
+	/*
 	for (var i=25;i<675;i=i+51)
 	{
 		this.controller.addCircle({
@@ -104,7 +128,7 @@ var CollisionTest = function(collision, socket){
 			solid: {
 				mass:Infinity}
 		});
-	};
+	};*/
 	
 	
 	for (var i=100;i<500;i=i+100) 
@@ -147,6 +171,7 @@ var CollisionTest = function(collision, socket){
 	
 	this.start = function()
 	{
+		console.log("ClientReady received, let's start");
 		game.controller.resume();
 	};
 };
