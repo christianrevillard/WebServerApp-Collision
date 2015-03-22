@@ -149,7 +149,7 @@ var CollisionTest = function(collision, socket){
 			radius: 25,
 			position: {x: i, y: j-1.2*(i/5)+10+1+25},			
 			solid: {mass:2, collisionCoefficient:1},
-			moving: {speed:{x:0,y:0}}//,acceleration:{y:100}}
+			moving: {speed:{x:0,y:0},acceleration:{y:10}}
 //			moving: {speed:{x:i-300,y:j-200},acceleration:{y:0}}
 		});	
 	};

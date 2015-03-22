@@ -48,6 +48,14 @@ CreCollision.onload = function ()
 			gradient.addColorStop(1.0,color2);
 			context.fillStyle = gradient;
 			context.fill();
+			
+			context.moveTo(0, 10);
+			context.lineTo(0, 0);
+			context.lineTo(10, 0);
+			context.strokeStyle = "black";
+			context.lineWidth = 1;
+			context.stroke();
+
 		},
 		{width:20, height:20, edgeResolution:1}		
 	);
@@ -55,6 +63,9 @@ CreCollision.onload = function ()
 	controller.addElementType(
 			"bigRound",
 			function (context) {
+				context.moveTo(0, 25);
+				context.lineTo(0, 0);
+				context.lineTo(25, 0);
 				context.arc(0,0,25,0,2*Math.PI);
 				context.strokeStyle = "black";
 				context.lineWidth = 3;
