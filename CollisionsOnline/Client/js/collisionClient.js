@@ -4,8 +4,8 @@ CreCollision.onload = function ()
 {		
 	var socket = 
 		window.location.href.indexOf('rhcloud.com')>-1?
-	    io("http://nodejs-creweb.rhcloud.com:8000/collisionOnline/collisionSocket"):
-		io("/collisionOnline/collisionSocket");
+	    io("http://nodejs-creweb.rhcloud.com:8000/CollisionsOnline/Server/collisionSocket"):
+		io("/CollisionsOnline/Server/collisionSocket");
 
 	var theCanvas = document.getElementById('theCanvas');
 
