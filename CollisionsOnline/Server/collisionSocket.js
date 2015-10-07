@@ -2,36 +2,28 @@ var serverController = require('creanvas').controller;
 
 var games = [];
 
-// called only for the first of all users
-var startApplication = function(socketName) {
-
-	var collision = exports.applicationSocket = socketName;
-
-	console.log('Setting up collision socket ');
-	
-	collision.on('connection', function(socket){
-		
-		console.log('user connected: ' + socket.id);
-
-		// single user room stuff 
-		var theStuff = new CollisionTest(collision, socket)
-
-		socket.on('disconnect', function(){
-			theStuff.disconnect();
-			console.log('user disconnected');});
-		
-		socket.on('clientReady', function(){
-			theStuff.start();
-		});
-
-	});
+var onConnection = function (socket) {
+  
+  console.log('user connected: ' + socket.id);
+  
+  // single user room stuff 
+  var theStuff = new CollisionTest(socket)
+  
+  socket.on('disconnect', function () {
+    theStuff.disconnect();
+    console.log('user disconnected');
+  });
+  
+  socket.on('clientReady', function () {
+    theStuff.start();
+  });
 };
 
-var CollisionTest = function(collision, socket){
+var CollisionTest = function(socket){
 	var game = this;
 	
 	// each user gets a new room
-	this.controller = new serverController.Controller(collision, socket.id, false)
+	this.controller = new serverController.Controller(socket.nsp, socket.id, false)
 	this.controller.addSocket(socket);	
 
 	this.controller.addAxeAlignedBox({
@@ -167,5 +159,4 @@ var CollisionTest = function(collision, socket){
 	};
 };
 
-exports.startApplication = startApplication;
-exports.applicationSocket = null;
+module.exports = onConnection;
